@@ -6,7 +6,7 @@
 #    By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 00:17:03 by soahn             #+#    #+#              #
-#    Updated: 2022/04/21 00:27:11 by soahn            ###   ########.fr        #
+#    Updated: 2022/04/25 00:46:44 by soahn            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJS	= $(SRCS:.c=.o)
 	$(CC) $(CFLAGS) -I $(INCS_DIR) -o $@ -c $?
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCS_DIR)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCS_DIR) -lpthread
 
 all : $(NAME)
 
