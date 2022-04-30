@@ -6,7 +6,7 @@
 #    By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 00:17:03 by soahn             #+#    #+#              #
-#    Updated: 2022/04/25 00:46:44 by soahn            ###   ########.fr        #
+#    Updated: 2022/05/01 00:09:50 by soahn            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM		= rm -f
 INCS_DIR		= ./include/
 SRCS_DIR		= ./src/
 
-SRC		= main.c
+SRC		= main.c action.c dinner.c helper.c init.c
 
 SRCS	= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS	= $(SRCS:.c=.o)

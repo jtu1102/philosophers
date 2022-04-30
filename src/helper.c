@@ -6,7 +6,7 @@
 /*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 23:41:53 by soahn             #+#    #+#             */
-/*   Updated: 2022/04/26 03:53:10 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/01 00:44:11 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exit_msg(char *msg)
 {
 	printf(RED);
 	printf("[Error]");
-	printf(msg);
+	printf("%s", msg);
 	printf(RESET);
 	exit(EXIT_ERROR);
 }
@@ -59,9 +59,9 @@ long long	get_current_time(void)
 void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->printing);
-	printf("%ld", get_current_time());
-	printf(" %d ", id);
-	printf(action);
+	printf("%lld", get_current_time() - data->start_time);
+	printf(" %d ", id + 1);
+	printf("%s", action);
 	printf("\n");
 	pthread_mutex_unlock(&data->printing);
 }

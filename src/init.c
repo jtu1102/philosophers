@@ -6,7 +6,7 @@
 /*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:07:10 by soahn             #+#    #+#             */
-/*   Updated: 2022/04/26 04:10:40 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/01 00:40:55 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_mutex(t_data *data)
 		exit_msg("initialize mutex fail");
 }
 
-void	init_philo(t_data *data, t_philo *philo)
+void	init_philo(t_data *data)
 {
 	int	i;
 	int N;
@@ -67,14 +67,16 @@ void	init_philo(t_data *data, t_philo *philo)
 		data->philo[i].right_fork = (i + 1) % N;
 		data->philo[i].last_eat_time = 0;
 		data->philo[i].thread_id = 0;
+		data->philo[i].eating_cnt = 0;
 		data->philo[i].data = data;
 	}
 }
 
-void	init_data(t_data *data, int argc, char **argv)
+void	init_data(t_data *data)
 {
+	data->eating_end = FALSE;
 	data->dead = FALSE;
 	data->start_time = 0;
 	init_mutex(data);
-	init_philo(data, data->philo);
+	init_philo(data);
 }
