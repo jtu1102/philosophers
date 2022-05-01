@@ -6,19 +6,11 @@
 /*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 23:41:53 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/01 00:44:11 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/02 06:14:02 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (TRUE);
-	else
-		return (FALSE);
-}
 
 int	ft_atoi(const char *str)
 {
@@ -29,7 +21,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == FALSE)
+		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (-1);
 		result = result * 10 + (str[i] - '0');
 		i++;
@@ -56,12 +48,28 @@ long long	get_current_time(void)
 	return (current);
 }
 
+void	smart_usleep(long long time, t_data *data)
+{
+	long long	start;
+
+	start = get_current_time();
+	while (data->dead == FALSE)
+	{
+		if (get_current_time() - start > time)
+			break ;
+		usleep(10); 
+	}
+}
+
 void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->printing);
-	printf("%lld", get_current_time() - data->start_time);
-	printf(" %d ", id + 1);
-	printf("%s", action);
-	printf("\n");
+	if (data->dead == FALSE)
+	{
+		printf("%lld", get_current_time() - data->start_time);
+		printf(" %d ", id + 1);
+		printf("%s", action);
+		printf("\n");
+	}
 	pthread_mutex_unlock(&data->printing);
 }

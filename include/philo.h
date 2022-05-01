@@ -6,7 +6,7 @@
 /*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:28:06 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/01 00:00:57 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/02 05:58:41 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	start_dinner(t_data *data);
 int			ft_atoi(const char *str);
 void		exit_msg(char *msg);
 long long	get_current_time(void);
+void		smart_usleep(long long time, t_data *data);
 void		print_action(t_data *data, int id, char *action);
 
 

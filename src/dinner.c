@@ -6,7 +6,7 @@
 /*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 03:42:19 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/01 00:57:10 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/02 07:01:01 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	*dinner(void *args)
 
 	philo = args;
 	data = philo->data;
-	philo->last_eat_time = get_current_time(); // 시뮬레이션 시작 시간 저장 !
 	if (philo->id % 2 == 1) // 짝수부터 시작
-		usleep(1000);
+		usleep(10000);
 	while (data->dead == FALSE) // 무한루프 돌리기
 	{
 		philo_eat(data, philo);
@@ -36,17 +35,20 @@ void	*dinner(void *args)
 void	check_eating_end(t_data *data)
 {
 	int	i;
-	int	max;
+	int	eat_max;
+	int	check;
 
-	max = -1;
-	i = 0;
+	eat_max = data->number_of_times_each_philosopher_must_eat;
+	if (eat_max == -1)
+		return ;
+	check = 0;
+	i = -1;
 	while (++i < data->number_of_philosophers)
 	{
-		if (data->philo[i - 1].eating_cnt != data->philo[i].eating_cnt)
-			return ;
+		if (data->philo[i].eating_cnt >= eat_max)
+			check++;
 	}
-	if (data->philo[i - 1].eating_cnt \
-	== data->number_of_times_each_philosopher_must_eat)
+	if (check == data->number_of_philosophers)
 		data->eating_end = TRUE;
 }
 
@@ -57,14 +59,16 @@ void	check_philo_dead(t_data *data)
 
 	philo = data->philo;
 	i = -1;
-	while (++i < data->number_of_philosophers)
+	while (++i < data->number_of_philosophers && !(data->dead))
 	{
-		long long gap = get_current_time() - philo[i].last_eat_time;
-		if (gap > data->time_to_die)
+		pthread_mutex_lock(&(data->mu));
+		if (get_current_time() - philo[i].last_eat_time > data->time_to_die)
 		{
-			printf("dead: %lld\n", gap);
-			data->dead = TRUE;
+			print_action(data, philo[i].id, "is died");
+			data->dead = TRUE;	
 		}
+		pthread_mutex_unlock(&(data->mu));
+		usleep(10);
 	}
 		
 }
@@ -98,13 +102,13 @@ void	start_dinner(t_data *data)
 	{
 		if (pthread_create(&data->philo[i].thread_id, NULL, dinner, (void *)&data->philo[i]))
 			exit_msg("create thread fail");
+		data->philo[i].last_eat_time = get_current_time(); // 시뮬레이션 시작 시간 저장 !
 		usleep(10);
 	}
-	while (data->dead == FALSE)
+	while (data->eating_end == FALSE)
 	{
-		check_eating_end(data);
 		check_philo_dead(data);
-		usleep(10);
+		check_eating_end(data);
 	}
 	clear_dinner(data); // 스레드 정리, 뮤텍스 파괴, 메모리 해제
 }
