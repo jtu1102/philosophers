@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: soahn <soahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:28:06 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/02 05:58:41 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/03 19:57:42 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 	long long			start_time;
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		printing;
-	pthread_mutex_t		mu;
+	pthread_mutex_t		checking;
 	t_philo				*philo;
 }			t_data;
 

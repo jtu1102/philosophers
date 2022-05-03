@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: soahn <soahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:07:10 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/01 00:40:55 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/03 19:58:16 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_mutex(t_data *data)
 			exit_msg("initialize mutex fail");
 	if (pthread_mutex_init(&data->printing, NULL))
 		exit_msg("initialize mutex fail");
-	if (pthread_mutex_init(&data->mu, NULL))
+	if (pthread_mutex_init(&data->checking, NULL))
 		exit_msg("initialize mutex fail");
 }
 

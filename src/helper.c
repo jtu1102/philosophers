@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soahn <soahn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: soahn <soahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 23:41:53 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/02 06:14:02 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/03 20:49:06 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	smart_usleep(long long time, t_data *data)
 	{
 		if (get_current_time() - start > time)
 			break ;
-		usleep(10); 
+		usleep(10);
 	}
 }
 
