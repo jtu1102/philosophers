@@ -6,7 +6,7 @@
 /*   By: soahn <soahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 23:41:53 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/05 13:38:35 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/09 17:57:13 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->printing);
 	if (data->dead == FALSE)
-	{
-		printf("%lld", get_current_time() - data->start_time);
-		printf(" %d ", id + 1);
-		printf("%s", action);
-		printf("\n");
-	}
+		printf("%lld %d %s\n", get_current_time() - data->start_time,
+			id + 1, action);
 	pthread_mutex_unlock(&data->printing);
 }

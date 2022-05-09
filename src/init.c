@@ -6,7 +6,7 @@
 /*   By: soahn <soahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:07:10 by soahn             #+#    #+#             */
-/*   Updated: 2022/05/08 11:02:45 by soahn            ###   ########.fr       */
+/*   Updated: 2022/05/09 18:01:05 by soahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	init_arg(t_data *data, int argc, char **argv)
 	while (++i < argc)
 	{
 		int_arr[i] = ft_atoi(argv[i]);
-		if (int_arr[i] <= 0)
+		if (int_arr[i] < 0)
+			exit_msg("wrong argument");
+		if (i == 1 && int_arr[i] == 0)
 			exit_msg("wrong argument");
 	}
 	data->number_of_philosophers = int_arr[1];
